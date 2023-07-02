@@ -22,7 +22,7 @@ start_time = datetime.utcnow()
 
 @bot.event
 async def on_ready():
-  server_id = 1064091614793957396
+  server_id = 740830080451739659
   server = bot.get_guild(server_id)
   activity_text = f" over {server.member_count} explorers"
   activity = discord.Activity(type=discord.ActivityType.watching,
