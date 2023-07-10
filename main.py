@@ -159,7 +159,7 @@ async def group_leave(interaction: discord.Interaction, group: str):
     app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
     app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
     ])
-async def group_ping(interaction: discord.Interaction, challenge_name: str, group: str):
+async def group_ping(interaction: discord.Interaction, name: str, group: str):
     # Check if the user has one of the allowed roles
     if any(role.id in allowed_roles for role in interaction.user.roles):
         groups_folder = "groups"
@@ -183,7 +183,7 @@ async def group_ping(interaction: discord.Interaction, challenge_name: str, grou
             date_string = datetime.now().strftime("%B %d, %Y")
             embed = discord.Embed(
                 title=f"{group}",
-                description=challenge_name,
+                description=name,
                 color=random.randint(0, 0xFFFFFF)
             )
           
