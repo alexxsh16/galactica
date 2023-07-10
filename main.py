@@ -66,7 +66,7 @@ from keepalive import keep_alive
 
 keep_alive()
 
-# Daily Challenges
+# Groups
 
 allowed_roles = [759797790149836821, 745890314224664667, 835580312779489330, 740833223059177532]  # List of allowed role IDs who can Ping
 
@@ -75,6 +75,7 @@ toggle_cooldowns = {}  # Dictionary to keep track of last toggle time for each u
 @bot.tree.command(name="group_join", description="Join a group")
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
+    app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
     ])
 async def group_join(interaction: discord.Interaction, group: str):
     groups_folder = "groups"
@@ -115,6 +116,7 @@ async def group_join(interaction: discord.Interaction, group: str):
 @bot.tree.command(name="group_leave", description="Leave a group")
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
+    app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
     ])
 async def group_leave(interaction: discord.Interaction, group: str):
     groups_folder = "groups"
@@ -155,6 +157,7 @@ async def group_leave(interaction: discord.Interaction, group: str):
 @bot.tree.command(name="group_ping", description="Ping everyone in a group (staff only)")
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
+    app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
     ])
 async def group_ping(interaction: discord.Interaction, challenge_name: str, group: str):
     # Check if the user has one of the allowed roles
@@ -198,6 +201,7 @@ async def group_ping(interaction: discord.Interaction, challenge_name: str, grou
 @bot.tree.command(name="group_check", description="Check who's in a group (staff only)")
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
+    app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
     ])
 async def group_check(interaction: discord.Interaction, group: str):
     # Check if the user has one of the allowed roles
