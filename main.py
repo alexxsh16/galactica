@@ -186,6 +186,7 @@ async def group_ping(interaction: discord.Interaction, name: str, group: str):
                 description=name,
                 color=random.randint(0, 0xFFFFFF)
             )
+            embed.set_footer(text="Join the group using /group_join")
           
             await interaction.response.send_message("Done", ephemeral=True)
             await interaction.channel.send(embed=embed)
