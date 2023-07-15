@@ -54,7 +54,7 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.idle, activity=activity)
     await asyncio.sleep(30)  # sleep for 30 seconds
 
-    activity_text = "Galaxy's Playlist Contest"
+    activity_text = "Galaxy's Summer Chess Tournament"
     activity = discord.Activity(type=discord.ActivityType.competing,
                                 name=activity_text)
     await bot.change_presence(status=discord.Status.idle, activity=activity)
