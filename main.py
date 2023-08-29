@@ -76,6 +76,7 @@ toggle_cooldowns = {}  # Dictionary to keep track of last toggle time for each u
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
     app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
+    app_commands.Choice(name="Word of the Day", value="WordOfTheDay"),
     ])
 async def group_join(interaction: discord.Interaction, group: str):
     groups_folder = "groups"
@@ -117,6 +118,7 @@ async def group_join(interaction: discord.Interaction, group: str):
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
     app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
+    app_commands.Choice(name="Word of the Day", value="WordOfTheDay")
     ])
 async def group_leave(interaction: discord.Interaction, group: str):
     groups_folder = "groups"
@@ -158,6 +160,7 @@ async def group_leave(interaction: discord.Interaction, group: str):
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
     app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
+    app_commands.Choice(name="Word of the Day", value="WordOfTheDay")
     ])
 async def group_ping(interaction: discord.Interaction, name: str, group: str):
     # Check if the user has one of the allowed roles
@@ -203,6 +206,7 @@ async def group_ping(interaction: discord.Interaction, name: str, group: str):
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
     app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
+    app_commands.Choice(name="Word of the Day", value="WordOfTheDay")
     ])
 async def group_check(interaction: discord.Interaction, group: str):
     # Check if the user has one of the allowed roles
