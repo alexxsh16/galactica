@@ -163,6 +163,9 @@ async def group_leave(interaction: discord.Interaction, group: str):
     app_commands.Choice(name="Word of the Day", value="Word Of The Day")
     ])
 async def group_ping(interaction: discord.Interaction, value: str, group: str):
+    # Replace "\n" with newline characters
+    value = value.replace("\\n", "\n")
+    
     # Check if the user has one of the allowed roles
     if any(role.id in allowed_roles for role in interaction.user.roles):
         groups_folder = "groups"
