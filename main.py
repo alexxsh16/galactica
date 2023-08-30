@@ -74,9 +74,9 @@ toggle_cooldowns = {}  # Dictionary to keep track of last toggle time for each u
 
 @bot.tree.command(name="group_join", description="Join a group")
 @app_commands.choices(group=[
-    app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
-    app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
-    app_commands.Choice(name="Word of the Day", value="WordOfTheDay"),
+    app_commands.Choice(name="Daily Challenge", value="Daily Challenge"),
+    app_commands.Choice(name="Fact of the Day", value="Fact Of The Day"),
+    app_commands.Choice(name="Word of the Day", value="Word Of The Day"),
     ])
 async def group_join(interaction: discord.Interaction, group: str):
     groups_folder = "groups"
@@ -116,9 +116,9 @@ async def group_join(interaction: discord.Interaction, group: str):
 
 @bot.tree.command(name="group_leave", description="Leave a group")
 @app_commands.choices(group=[
-    app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
-    app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
-    app_commands.Choice(name="Word of the Day", value="WordOfTheDay")
+    app_commands.Choice(name="Daily Challenge", value="Daily Challenge"),
+    app_commands.Choice(name="Fact of the Day", value="Fact Of The Day"),
+    app_commands.Choice(name="Word of the Day", value="Word Of The Day")
     ])
 async def group_leave(interaction: discord.Interaction, group: str):
     groups_folder = "groups"
@@ -158,11 +158,11 @@ async def group_leave(interaction: discord.Interaction, group: str):
 
 @bot.tree.command(name="group_ping", description="Ping everyone in a group (staff only)")
 @app_commands.choices(group=[
-    app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
-    app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
-    app_commands.Choice(name="Word of the Day", value="WordOfTheDay")
+    app_commands.Choice(name="Daily Challenge", value="Daily Challenge"),
+    app_commands.Choice(name="Fact of the Day", value="Fact Of The Day"),
+    app_commands.Choice(name="Word of the Day", value="Word Of The Day")
     ])
-async def group_ping(interaction: discord.Interaction, name: str, group: str):
+async def group_ping(interaction: discord.Interaction, value: str, group: str):
     # Check if the user has one of the allowed roles
     if any(role.id in allowed_roles for role in interaction.user.roles):
         groups_folder = "groups"
@@ -186,7 +186,7 @@ async def group_ping(interaction: discord.Interaction, name: str, group: str):
             date_string = datetime.now().strftime("%B %d, %Y")
             embed = discord.Embed(
                 title=f"{group}",
-                description=name,
+                description=f"{value}",
                 color=random.randint(0, 0xFFFFFF)
             )
             embed.set_footer(text="Join the group using /group_join")
@@ -204,9 +204,9 @@ async def group_ping(interaction: discord.Interaction, name: str, group: str):
 
 @bot.tree.command(name="group_check", description="Check who's in a group (staff only)")
 @app_commands.choices(group=[
-    app_commands.Choice(name="Daily Challenge", value="DailyChallenge"),
-    app_commands.Choice(name="Fact of the Day", value="FactOfTheDay"),
-    app_commands.Choice(name="Word of the Day", value="WordOfTheDay")
+    app_commands.Choice(name="Daily Challenge", value="Daily Challenge"),
+    app_commands.Choice(name="Fact of the Day", value="Fact Of The Day"),
+    app_commands.Choice(name="Word of the Day", value="Word Of The Day")
     ])
 async def group_check(interaction: discord.Interaction, group: str):
     # Check if the user has one of the allowed roles
