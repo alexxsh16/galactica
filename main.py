@@ -75,8 +75,8 @@ toggle_cooldowns = {}  # Dictionary to keep track of last toggle time for each u
 @bot.tree.command(name="group_join", description="Join a group")
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="Daily Challenge"),
-    app_commands.Choice(name="Fact of the Day", value="Fact Of The Day"),
-    app_commands.Choice(name="Word of the Day", value="Word Of The Day"),
+    app_commands.Choice(name="Fact of the Day", value="Fact of the Day"),
+    app_commands.Choice(name="Word of the Day", value="Word of the Day"),
     ])
 async def group_join(interaction: discord.Interaction, group: str):
     groups_folder = "groups"
@@ -117,8 +117,8 @@ async def group_join(interaction: discord.Interaction, group: str):
 @bot.tree.command(name="group_leave", description="Leave a group")
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="Daily Challenge"),
-    app_commands.Choice(name="Fact of the Day", value="Fact Of The Day"),
-    app_commands.Choice(name="Word of the Day", value="Word Of The Day")
+    app_commands.Choice(name="Fact of the Day", value="Fact of the Day"),
+    app_commands.Choice(name="Word of the Day", value="Word of the Day")
     ])
 async def group_leave(interaction: discord.Interaction, group: str):
     groups_folder = "groups"
@@ -159,8 +159,8 @@ async def group_leave(interaction: discord.Interaction, group: str):
 @bot.tree.command(name="group_ping", description="Ping everyone in a group (staff only)")
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="Daily Challenge"),
-    app_commands.Choice(name="Fact of the Day", value="Fact Of The Day"),
-    app_commands.Choice(name="Word of the Day", value="Word Of The Day")
+    app_commands.Choice(name="Fact of the Day", value="Fact of the Day"),
+    app_commands.Choice(name="Word of the Day", value="Word of the Day")
     ])
 async def group_ping(interaction: discord.Interaction, value: str, group: str):
     # Replace "\n" with newline characters
@@ -208,8 +208,8 @@ async def group_ping(interaction: discord.Interaction, value: str, group: str):
 @bot.tree.command(name="group_check", description="Check who's in a group (staff only)")
 @app_commands.choices(group=[
     app_commands.Choice(name="Daily Challenge", value="Daily Challenge"),
-    app_commands.Choice(name="Fact of the Day", value="Fact Of The Day"),
-    app_commands.Choice(name="Word of the Day", value="Word Of The Day")
+    app_commands.Choice(name="Fact of the Day", value="Fact of the Day"),
+    app_commands.Choice(name="Word of the Day", value="Word of the Day")
     ])
 async def group_check(interaction: discord.Interaction, group: str):
     # Check if the user has one of the allowed roles
@@ -665,26 +665,27 @@ async def law(interaction: discord.Interaction, law: Optional[int] = None):
 @bot.tree.command(
   name="say",
   description="The bot won't listen unless you are cool, don't try XD")
-@commands.is_owner()
 @app_commands.describe(
   thing_to_say="Pray, tell me, my lord, what words should I utter?")
 async def say(interaction: discord.Interaction, thing_to_say: str):
-  authorized_user = [
-    676367462270238730, 1071057018183499861, 740509592701763604,
-    738786980237934613, 769553775941386252, 466263032218124319,
-    313739229962436608
-  ]
-  if interaction.user.id in authorized_user:
-    await interaction.channel.send(thing_to_say)
-    await interaction.response.send_message("Sent!", ephemeral=True)
+    # Replace "\n" with newline characters
+    thing_to_say = thing_to_say.replace("\\n", "\n")
     
-    log_channel_id = 795233091542712350
-    log_channel = bot.get_channel(log_channel_id)
-    if log_channel:
-      await log_channel.send(f"__`[{datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC]`__ - **{interaction.user.name}** used </say:1080898269951049769> in <#{interaction.channel_id}>")
-  else:
-    await interaction.response.send_message("I only listen to certain people for that command!", ephemeral=True)
-
+    authorized_user = [
+        676367462270238730, 1071057018183499861, 740509592701763604,
+        738786980237934613, 769553775941386252, 466263032218124319,
+        313739229962436608
+    ]
+    if interaction.user.id in authorized_user:
+        await interaction.channel.send(thing_to_say)
+        await interaction.response.send_message("Sent!", ephemeral=True)
+        
+        log_channel_id = 795233091542712350
+        log_channel = bot.get_channel(log_channel_id)
+        if log_channel:
+            await log_channel.send(f"__`[{datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC]`__ - **{interaction.user.name}** used </say:1080898269951049769> in <#{interaction.channel_id}>")
+    else:
+        await interaction.response.send_message("I only listen to certain people for that command!", ephemeral=True)
 
 
 # Joke
@@ -948,19 +949,45 @@ async def meme(interaction: discord.Interaction):
 
 
 @bot.tree.command(
-  name="confess",
-  description="Make an anonymous confession in #confessions. DMs are supported!"
+    name="confess",
+    description="Make an anonymous confession in #confessions. DMs are supported!"
 )
-async def confess(interaction: discord.Interaction, confession: str):
-  channel = bot.get_channel(1080435136614629436)
-  embed = discord.Embed(title="Confession by Anonymous User",
-                        description=confession)
-  embed.set_footer(
-    text=f"Date and Time: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}")
-  embed.color = random.randint(0, 0xFFFFFF)
-  await channel.send(embed=embed)
-  await interaction.response.send_message(f"Sent to {channel.name}!",
-                                          ephemeral=True)
+@app_commands.describe(
+    anonymous="You can opt to have your name appear in the confession if set to false. (True by default)"
+)
+@app_commands.describe(
+    image="You can opt to add an image file. Videos and other formats are not available."
+)
+async def confess(
+    interaction: discord.Interaction,
+    confession: str,
+    image: discord.Attachment = None,  # Make the attachment optional by setting a default value of None
+    anonymous: bool = True,  # Added an optional boolean input with a default value of True
+):
+    # Replace "\n" with newline characters
+    confession = confession.replace("\\n", "\n")
+
+    channel = bot.get_channel(1080435136614629436)
+
+    if anonymous:
+        embed = discord.Embed(title="Confession by Anonymous User", description=confession)
+    else:
+        user = interaction.user  # Get the user who initiated the command
+        embed = discord.Embed(title=f"Confession by {user.display_name}", description=confession)
+
+    embed.set_footer(
+        text=f"Date and Time: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}")
+    embed.color = random.randint(0, 0xFFFFFF)
+
+    # Check if an attachment was provided
+    if image:
+        embed.set_image(url=image.url)  # Add the attachment as an image to the embed
+
+    await channel.send(embed=embed)
+    await interaction.response.send_message(f"Sent to {channel.name}!", ephemeral=True)
+
+
+
 
 
 # Chat
