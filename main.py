@@ -956,7 +956,7 @@ async def meme(interaction: discord.Interaction):
     anonymous="You can opt to have your name appear in the confession if set to false. (True by default)"
 )
 @app_commands.describe(
-    image="You can opt to add an image file. Videos and other formats are not available."
+    image="You can opt to add an image file. Videos and other formats are not supported."
 )
 async def confess(
     interaction: discord.Interaction,
