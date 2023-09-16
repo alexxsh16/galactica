@@ -680,7 +680,7 @@ async def say(interaction: discord.Interaction, thing_to_say: str):
         await interaction.channel.send(thing_to_say)
         await interaction.response.send_message("Sent!", ephemeral=True)
         
-        log_channel_id = 795233091542712350
+        log_channel_id = 1152550043333689454
         log_channel = bot.get_channel(log_channel_id)
         if log_channel:
             await log_channel.send(f"__`[{datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC]`__ - **{interaction.user.name}** used </say:1080898269951049769> in <#{interaction.channel_id}>")
