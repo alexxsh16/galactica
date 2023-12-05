@@ -476,35 +476,39 @@ async def suggest_sotd(interaction: discord.Interaction,
 
 # DM
 @bot.tree.command(
-  name="dm",
-  description="Send a direct message to a mentioned user with a custom message"
+    name="dm",
+    description="Send a direct message to a mentioned user with a custom message"
 )
 @commands.is_owner()
 @app_commands.describe(user="The user to send a message to",
                        message="The message to send to the user")
 async def dm(interaction: discord.Interaction, user: discord.Member,
              message: str):
-  authorized_user = [
-    676367462270238730, 1071057018183499861, 738786980237934613,
-    740509592701763604
-  ]
-  if interaction.user.id in authorized_user:
-    try:
-      print(
-        f"[{datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}] - [{interaction.channel}] -  {interaction.user.name} used /dm"
-      )
-      await user.send(f"{message}")
-      await interaction.response.send_message(
-        f"Sent a message to {user.display_name}! __**The following was sent**__: {message}",
-        ephemeral=True)
+    authorized_user = [
+        676367462270238730, 1071057018183499861, 738786980237934613,
+        740509592701763604
+    ]
+    if interaction.user.id in authorized_user:
+        try:
+            # Replace "\\n" with "\n" in the message
+            message = message.replace("\\n", "\n")
 
-    except discord.Forbidden:
-      await interaction.response.send_message(
-        f"I couldn't send a message to {user.display_name}, they may have blocked me or disabled DMs",
-        ephemeral=True)
-  else:
-    await interaction.response.send_message(
-      f"I only listen to certain peeps for that command!", ephemeral=True)
+            print(
+                f"[{datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')}] - [{interaction.channel}] -  {interaction.user.name} used /dm"
+            )
+            await user.send(message)
+            await interaction.response.send_message(
+                f"Sent a message to {user.display_name}! __**The following was sent**__: {message}",
+                ephemeral=True)
+
+        except discord.Forbidden:
+            await interaction.response.send_message(
+                f"I couldn't send a message to {user.display_name}, they may have blocked me or disabled DMs",
+                ephemeral=True)
+    else:
+        await interaction.response.send_message(
+            f"I only listen to certain peeps for that command!", ephemeral=True)
+
 
 
 # Listen for DMs
